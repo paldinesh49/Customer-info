@@ -1,0 +1,148 @@
+﻿<!-- Button to open Create Customer Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCustomerModal">
+    Create Customer
+</button>
+
+<!-- Create Customer Modal -->
+<div id="createCustomerModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Customer</h5>
+                
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createCustomerForm">
+                    @Html.AntiForgeryToken() <!-- Anti-forgery token -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genderId">Gender</label>
+                        <select class="form-control" id="genderId">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stateId">State</label>
+                        <select class="form-control" id="stateId" required>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="districtId">District</label>
+                        <select class="form-control" id="districtId" required>
+                            <!-- Options will be populated based on selected state -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Customer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to Edit Customer -->
+<div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCustomerForm">
+                    @Html.AntiForgeryToken() <!-- Anti-forgery token -->
+                    <input type="hidden" id="editCustomerId" name="id" />
+
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editGenderId" class="form-label">Gender</label>
+                        <select class="form-control" id="editGenderId" name="genderId" required>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editStateId" class="form-label">State</label>
+                        <select class="form-control" id="editStateId" name="stateId" required>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDistrictId" class="form-label">District</label>
+                        <select class="form-control" id="editDistrictId" name="districtId" required>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to View Customer Details -->
+<div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewCustomerModalLabel">Customer Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Customer Name -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Name</label>
+                    <p id="viewName" class="text-muted"></p>
+                </div>
+                <!-- Customer Gender -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Gender</label>
+                    <p id="viewGender" class="text-muted"></p>
+                </div>
+                <!-- Customer State -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">State</label>
+                    <p id="viewState" class="text-muted"></p>
+                </div>
+                <!-- Customer District -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">District</label>
+                    <p id="viewDistrict" class="text-muted"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Customer List Table -->
+<table id="customerTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>District</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="customerList">
+        <!-- AJAX will load data here -->
+    </tbody>
+</table>
+
+
+

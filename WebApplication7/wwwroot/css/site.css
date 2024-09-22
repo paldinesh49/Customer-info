@@ -1,0 +1,51 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/* Add your custom CSS here */
+.card {
+    opacity: 0.9; /* Add some transparency */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none; /* Remove border */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker on hover */
+    }
+
+.btn-secondary {
+    background-color: #6c757d; /* Bootstrap secondary color */
+    border: none; /* Remove border */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268; /* Darker on hover */
+    }
+
+.text-danger {
+    margin-top: 5px; /* Space above error message */
+}

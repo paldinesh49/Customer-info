@@ -1,0 +1,87 @@
+﻿<!-- Add Customer Modal -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addCustomerForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <small id="nameError" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="genderId">Gender ID</label>
+                        <input type="number" class="form-control" id="genderId" name="genderId" required>
+                        <small id="genderError" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="stateId">State ID</label>
+                        <input type="number" class="form-control" id="stateId" name="stateId" required>
+                        <small id="stateError" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="districtId">District ID</label>
+                        <input type="number" class="form-control" id="districtId" name="districtId" required>
+                        <small id="districtError" class="form-text text-danger"></small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="saveCustomerBtn" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#saveCustomerBtn").click(function () {
+            var isValid = true;
+            var name = $("#name").val();
+            var genderId = $("#genderId").val();
+            var stateId = $("#stateId").val();
+            var districtId = $("#districtId").val();
+
+            // Reset error messages
+            $("#nameError, #genderError, #stateError, #districtError").text("");
+
+            // Name validation (alphabets only)
+            var nameRegex = /^[a-zA-Z]+$/;
+            if (!nameRegex.test(name)) {
+                isValid = false;
+                $("#nameError").text("Name must contain only alphabets.");
+            }
+
+            // GenderId, StateId, DistrictId validation (numbers only)
+            if (!$.isNumeric(genderId) || !$.isNumeric(stateId) || !$.isNumeric(districtId)) {
+                isValid = false;
+                $("#genderError").text("Gender ID must be a number.");
+                $("#stateError").text("State ID must be a number.");
+                $("#districtError").text("District ID must be a number.");
+            }
+
+            // Submit if valid
+            if (isValid) {
+                $.ajax({
+                    url: '/Customer/Create',  // Your backend endpoint
+                    type: 'POST',
+                    data: $("#addCustomerForm").serialize(),
+                    success: function (response) {
+                        // Update customer list dynamically or reload the page
+                        location.reload();
+                    },
+                    error: function (response) {
+                        alert("Failed to save customer. Please try again.");
+                    }
+                });
+            }
+        });
+    });
+</script>
